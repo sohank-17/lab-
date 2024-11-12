@@ -1,0 +1,33 @@
+mode: standalone
+
+# Set default rootUser and rootPassword for MinIO
+auth:
+  rootUser: "rootuser"
+  rootPassword: "rootpass123"
+
+# Enable persistence for data retention
+persistence:
+  enabled: true
+  size: 10Gi
+  storageClass: ""
+
+# Number of drives and nodes configuration
+drivesPerNode: 1
+replicas: 1
+pools: 1
+
+# Configure resource requests and limits
+resources:
+  requests:
+    memory: 0.5Gi
+    cpu: 250m
+  limits:
+    memory: 1Gi
+    cpu: 500m
+
+# Pre-configured buckets for MinIO
+buckets:
+  - name: demucs-bucket
+    policy: public
+    region: us-east-1
+

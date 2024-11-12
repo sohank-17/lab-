@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: demucs-rest
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: demucs-rest
+  template:
+    metadata:
+      labels:
+        app: demucs-rest
+    spec:
+      containers:
+        - name: demucs-rest
+          image: sohank17/demucs-rest:v5
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 5001
+              protocol: TCP
+          env:
+            - name: REDIS_HOST
+              value: "redis.redis.svc.cluster.local"
+            - name: REDIS_PORT
+              value: "6379"
+            - name: MINIO_HOST
+              value: "minio-proj.minio.svc.cluster.local:9000"
+            - name: REDIS_QUEUE_WORKERS
+              value: "toWorkers"  # Queue name for tasks
+            - name: REDIS_QUEUE_RESULTS
+              value: "resultsQueue"  # Queue name for results
+            - name: MINIO_INPUT_BUCKET
+              value: "input-files"

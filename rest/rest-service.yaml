@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: demucs-rest
+spec:
+  selector:
+    app: demucs-rest
+  ports:
+    - protocol: TCP
+      port: 80  # Exposing port 80 for your Flask app
+      targetPort: 5000  # Assuming Flask app runs on port 5000
+  type: ClusterIP  # Change this to NodePort or LoadBalancer if needed
+
